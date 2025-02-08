@@ -26,8 +26,6 @@ alias dot="dotfiles"
 alias home="home-manager switch"
 alias conf="nvim ~/.config/fish/myconfig.fish"
 
-zoxide init fish | source
-
 set -g __fish_config_end (date +%s%N)
 set -g __fish_config_duration (math "($__fish_config_end - $__fish_config_start) / 1000000")
 set -g __fish_config_duration (printf "%.3f" $__fish_config_duration)
