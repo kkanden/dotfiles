@@ -14,7 +14,6 @@ oh-my-posh init fish --config '~/.config/.my-omp.omp.json' | source
 # fish_vi_key_bindings
 
 # PATH CONFIGURATION
-fish_add_path --path '/home/oliwia/.local/bin/'
 fish_add_path --path '/mnt/c/Users/oliwia/scoop/shims/win32yank.exe'
 
 # ALIASES
@@ -25,6 +24,7 @@ alias la="ls -la"
 alias dot="dotfiles"
 alias home="home-manager switch"
 alias conf="nvim ~/.config/fish/myconfig.fish"
+alias nixh="nvim ~/.config/home-manager/home.nix"
 
 set -g __fish_config_end (date +%s%N)
 set -g __fish_config_duration (math "($__fish_config_end - $__fish_config_start) / 1000000")
