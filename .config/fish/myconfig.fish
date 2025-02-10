@@ -13,9 +13,6 @@ oh-my-posh init fish --config '~/.config/.my-omp.omp.json' | source
 
 # fish_vi_key_bindings
 
-# PATH CONFIGURATION
-fish_add_path --path '/mnt/c/Users/oliwia/scoop/shims/win32yank.exe'
-
 # ALIASES
 alias r="R"
 alias gs="git status"
