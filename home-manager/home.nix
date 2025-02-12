@@ -5,7 +5,6 @@
   inputs,
   ...
 }: let
-  # air = pkgs.callPackage ./air.nix inputs;
   r-packages = with pkgs.rPackages; [
     languageserver
     data_table
@@ -39,7 +38,6 @@ in {
         diffutils
         which
         gnumake
-        ripgrep
         fd
         fzf
         bat
@@ -66,7 +64,6 @@ in {
         ;
     }
     ++ [
-      # air
       (pkgs.rWrapper.override {packages = r-packages;}) # R
       (pkgs.python313.withPackages py-packages) # python
     ];
@@ -86,37 +83,9 @@ in {
     # '';
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/oliwia/etc/profile.d/hm-session-vars.sh
-  #
-
   home.sessionVariables = {
     EDITOR = "nvim";
-    RIPGREP_CONFIG_PATH = "$HOME/.config/.ripgreprc";
   };
-
-  # programs.bash = {
-  #   initExtra = ''
-  #     if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-  #     then
-  #       shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-  #       exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-  #     fi
-  #   '';
-  # };
 
   programs.git = {
     enable = true;
@@ -137,17 +106,24 @@ in {
     package = pkgs.openssh;
   };
 
+  programs.ripgrep = {
+    enable = true;
+    arguments = [
+      "--smart-case"
+    ];
+  };
+
   programs.oh-my-posh = {
     enable = true;
-    # settings = builtins.fromJSON (
-    #   builtins.unsafeDiscardStringContext (
-    #     builtins.readFile (
-    #       builtins.path {
-    #         path = ../.my-omp.omp.json;
-    #       }
-    #     )
-    #   )
-    # );
+    settings = builtins.fromJSON (
+      builtins.unsafeDiscardStringContext (
+        builtins.readFile (
+          builtins.path {
+            path = ../.config/.my-omp.omp.json; # path relative to home.nix
+          }
+        )
+      )
+    );
   };
 
   programs.zoxide = {
@@ -159,20 +135,37 @@ in {
     shellAliases = {
       r = "R";
       gs = "git status";
-      so = "source ~/.config/fish/myconfig.fish";
       la = "ls -la";
-      dot = "dotfiles";
-      home = "home-manager switch";
-      conf = "nvim ~/.config/fish/myconfig.fish";
-      nixh = "nvim ~/.config/home-manager/home.nix";
+      nixh = "nvim ~/dotfiles/.config/home-manager/home.nix";
+    };
+    functions = {
+      home = {
+        body =
+          # fish
+          ''
+            if test (count $argv) -eq 0
+              set argv[1] "switch"
+            end
+              pushd ~/dotfiles
+              home-manager --flake . $argv[1]
+              popd
+          '';
+      };
     };
     interactiveShellInit =
-      # sh
+      # fish
       ''
-        # source ~/.config/fish/myconfig.fish
+        function fish_greeting
+        end
       '';
   };
 
+  nix = {
+    package = pkgs.nix;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
