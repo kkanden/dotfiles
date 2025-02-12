@@ -139,6 +139,15 @@ in {
 
   programs.oh-my-posh = {
     enable = true;
+    # settings = builtins.fromJSON (
+    #   builtins.unsafeDiscardStringContext (
+    #     builtins.readFile (
+    #       builtins.path {
+    #         path = ../.my-omp.omp.json;
+    #       }
+    #     )
+    #   )
+    # );
   };
 
   programs.zoxide = {
@@ -147,10 +156,20 @@ in {
 
   programs.fish = {
     enable = true;
+    shellAliases = {
+      r = "R";
+      gs = "git status";
+      so = "source ~/.config/fish/myconfig.fish";
+      la = "ls -la";
+      dot = "dotfiles";
+      home = "home-manager switch";
+      conf = "nvim ~/.config/fish/myconfig.fish";
+      nixh = "nvim ~/.config/home-manager/home.nix";
+    };
     interactiveShellInit =
       # sh
       ''
-        source ~/.config/fish/myconfig.fish
+        # source ~/.config/fish/myconfig.fish
       '';
   };
 

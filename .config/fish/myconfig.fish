@@ -14,14 +14,6 @@ oh-my-posh init fish --config '~/.config/.my-omp.omp.json' | source
 # fish_vi_key_bindings
 
 # ALIASES
-alias r="R"
-alias gs="git status"
-alias so="source ~/.config/fish/myconfig.fish"
-alias la="ls -la"
-alias dot="dotfiles"
-alias home="home-manager switch"
-alias conf="nvim ~/.config/fish/myconfig.fish"
-alias nixh="nvim ~/.config/home-manager/home.nix"
 
 set -g __fish_config_end (date +%s%N)
 set -g __fish_config_duration (math "($__fish_config_end - $__fish_config_start) / 1000000")
