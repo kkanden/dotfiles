@@ -37,6 +37,7 @@ in {
         gcc
         diffutils
         which
+        tree
         gnumake
         fd
         fzf
@@ -48,6 +49,7 @@ in {
         neovim
         cowsay
         lolcat
+        fortune
         spotify-player
         # langs
         rustup
@@ -135,6 +137,9 @@ in {
       la = "ls -la";
       nixh = "nvim ~/dotfiles/home-manager/home.nix";
     };
+    shellAbbrs = {
+      tree = "tree -C";
+    };
     functions = {
       home = {
         body =
@@ -154,6 +159,7 @@ in {
       ''
         function fish_greeting
         end
+        fortune | cowsay | lolcat
       '';
   };
 
