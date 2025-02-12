@@ -48,7 +48,6 @@ in {
         neovim
         cowsay
         lolcat
-        fastfetch
         spotify-player
         # langs
         rustup
@@ -118,9 +117,7 @@ in {
     settings = builtins.fromJSON (
       builtins.unsafeDiscardStringContext (
         builtins.readFile (
-          builtins.path {
-            path = ../.config/.my-omp.omp.json; # path relative to home.nix
-          }
+          ../.config/.my-omp.omp.json # path relative to home.nix
         )
       )
     );
@@ -158,6 +155,15 @@ in {
         function fish_greeting
         end
       '';
+  };
+
+  programs.fastfetch = {
+    enable = true;
+    settings = builtins.fromJSON (
+      builtins.unsafeDiscardStringContext (
+        builtins.readFile ../.config/fastfetch/config.jsonc
+      )
+    );
   };
 
   nix = {
