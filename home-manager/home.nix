@@ -88,45 +88,16 @@ in {
     EDITOR = "nvim";
   };
 
-  programs.git = {
+  programs.bash = {
     enable = true;
-    userName = "oliwia";
-    userEmail = "24637207+kkanden@users.noreply.github.com";
-    aliases = {
-      lg = "log --oneline --graph --all --decorate --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(yellow)%h%Creset - %C(blue)%an <%ae>%Creset - %C(green)%ad%Creset -%C(red)%d%Creset %s'";
-    };
-    extraConfig = {
-      init.defaultbranch = "main";
-      core.editor = "nvim";
-      core.autocrlf = false;
-    };
-  };
-
-  programs.ssh = {
-    enable = true;
-    package = pkgs.openssh;
-  };
-
-  programs.ripgrep = {
-    enable = true;
-    arguments = [
-      "--smart-case"
-    ];
-  };
-
-  programs.oh-my-posh = {
-    enable = true;
-    settings = builtins.fromJSON (
-      builtins.unsafeDiscardStringContext (
-        builtins.readFile (
-          ../.config/.my-omp.omp.json # path relative to home.nix
-        )
-      )
-    );
-  };
-
-  programs.zoxide = {
-    enable = true;
+    # enable fish shell as per https://nixos.wiki/wiki/Fish
+    initExtra = ''
+      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+      then
+        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+      fi
+    '';
   };
 
   programs.fish = {
@@ -157,10 +128,54 @@ in {
     interactiveShellInit =
       # fish
       ''
-        function fish_greeting
-        end
+        set fish_greeting
         fortune | cowsay | lolcat
       '';
+  };
+
+  programs.oh-my-posh = {
+    enable = true;
+    enableBashIntegration = false;
+    enableFishIntegration = true;
+    settings = builtins.fromJSON (
+      builtins.unsafeDiscardStringContext (
+        builtins.readFile (
+          ../.config/.my-omp.omp.json # path relative to home.nix
+        )
+      )
+    );
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = false;
+    enableFishIntegration = true;
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "oliwia";
+    userEmail = "24637207+kkanden@users.noreply.github.com";
+    aliases = {
+      lg = "log --oneline --graph --all --decorate --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(yellow)%h%Creset - %C(blue)%an <%ae>%Creset - %C(green)%ad%Creset -%C(red)%d%Creset %s'";
+    };
+    extraConfig = {
+      init.defaultbranch = "main";
+      core.editor = "nvim";
+      core.autocrlf = false;
+    };
+  };
+
+  programs.ssh = {
+    enable = true;
+    package = pkgs.openssh;
+  };
+
+  programs.ripgrep = {
+    enable = true;
+    arguments = [
+      "--smart-case"
+    ];
   };
 
   programs.fastfetch = {
@@ -178,6 +193,7 @@ in {
       experimental-features = nix-command flakes
     '';
   };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
