@@ -103,7 +103,6 @@ in {
     '';
   };
 
-  xdg.configFile."fish/themes".source = "${inputs.catppuccin-fish}/themes";
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -136,6 +135,8 @@ in {
         fortune | cowsay | lolcat
       '';
   };
+  xdg.configFile."fish/themes".source = "${inputs.catppuccin-fish}/themes";
+  xdg.configFile."fish/fish_variables".source = ../.config/fish/fish_variables;
 
   programs.tmux = {
     enable = true;
