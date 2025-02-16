@@ -34,6 +34,7 @@ in {
       inherit
         (pkgs)
         # tools
+        neovim
         gcc
         diffutils
         which
@@ -45,8 +46,9 @@ in {
         jq
         gh
         postgresql_17
+        ffmpeg
+        wget
         # cli
-        neovim
         cowsay
         lolcat
         fortune
@@ -92,6 +94,7 @@ in {
     enable = true;
     # enable fish shell as per https://nixos.wiki/wiki/Fish
     initExtra = ''
+      source ~/dotfiles/.config/ls_colors
       if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
       then
         shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
@@ -100,6 +103,7 @@ in {
     '';
   };
 
+  xdg.configFile."fish/themes".source = "${inputs.catppuccin-fish}/themes";
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -130,6 +134,24 @@ in {
       ''
         set fish_greeting
         fortune | cowsay | lolcat
+      '';
+  };
+
+  programs.tmux = {
+    enable = true;
+    keyMode = "vi";
+    prefix = "C-Space";
+    baseIndex = 1;
+    disableConfirmationPrompt = true;
+    escapeTime = 10;
+    focusEvents = true;
+    terminal = "screen-256color";
+    extraConfig =
+      # sh
+      ''
+        bind-key w kill-window
+        bind-key l list-window
+        set-option -sa terminal-features ",*:RGB"
       '';
   };
 

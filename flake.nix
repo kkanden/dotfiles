@@ -11,10 +11,10 @@
     crane = {
       url = "github:ipetkov/crane";
     };
-    # air = {
-    #   url = "github:posit-dev/air";
-    #   flake = false;
-    # };
+    catppuccin-fish = {
+      url = "github:catppuccin/fish";
+      flake = false;
+    };
   };
 
   outputs = {
