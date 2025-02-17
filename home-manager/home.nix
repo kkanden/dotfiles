@@ -42,7 +42,7 @@ in {
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages =
-    lib.attrValues {
+    builtins.attrValues {
       inherit
         (pkgs)
         # tools
@@ -86,16 +86,7 @@ in {
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+    ".Rprofile".source = ../.config/.Rprofile;
   };
 
   home.sessionVariables = {
@@ -144,6 +135,9 @@ in {
       # fish
       ''
         set fish_greeting
+        if not set -q TMUX
+          exec tmux
+        end
         fortune | cowsay | lolcat
       '';
   };
@@ -158,6 +152,7 @@ in {
     disableConfirmationPrompt = true;
     escapeTime = 10;
     focusEvents = true;
+    mouse = true;
     terminal = "screen-256color";
     extraConfig =
       # sh
@@ -165,7 +160,21 @@ in {
         bind-key w kill-window
         bind-key l list-window
         set-option -sa terminal-features ",*:RGB"
+        set-option -g renumber-windows on
+        set -g mouse on
+        set -g @catppuccin_flavour "mocha"
+        bind-key -T copy-mode-vi v send-keys -X begin-selection
+        bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+        bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
       '';
+    plugins = builtins.attrValues {
+      inherit
+        (pkgs.tmuxPlugins)
+        vim-tmux-navigator
+        catppuccin
+        yank
+        ;
+    };
   };
 
   programs.oh-my-posh = {
