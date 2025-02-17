@@ -5,12 +5,24 @@
   inputs,
   ...
 }: let
-  r-packages = with pkgs.rPackages; [
-    languageserver
-    data_table
-    tidyverse
-    stringi
-  ];
+  r-packages = with pkgs.rPackages;
+    [
+      languageserver
+      data_table
+      tidyverse
+      stringi
+      DBI
+      DT
+      shiny
+      shinyWidgets
+      shinyalert
+      bslib
+      bsicons
+      plotly
+      shinytitle
+      RPostgres
+    ]
+    ++ [pkgs.rPackages.config]; # have to separate to avoid conflict with variable;
   py-packages = python-pkgs:
     with python-pkgs; [
       black
