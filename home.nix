@@ -86,7 +86,7 @@ in {
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".Rprofile".source = ../.config/.Rprofile;
+    ".Rprofile".source = ./.config/.Rprofile;
   };
 
   home.sessionVariables = {
@@ -142,7 +142,7 @@ in {
       '';
   };
   xdg.configFile."fish/themes".source = "${inputs.catppuccin-fish}/themes";
-  xdg.configFile."fish/fish_variables".source = ../.config/fish/fish_variables;
+  xdg.configFile."fish/fish_variables".source = ./.config/fish/fish_variables;
 
   programs.tmux = {
     enable = true;
@@ -154,7 +154,7 @@ in {
     focusEvents = true;
     mouse = true;
     terminal = "screen-256color";
-    extraConfig = builtins.readFile ../.config/tmux/tmux.conf;
+    extraConfig = builtins.readFile ./.config/tmux/tmux.conf;
     plugins = builtins.attrValues {
       inherit
         (pkgs.tmuxPlugins)
@@ -174,7 +174,7 @@ in {
     settings = builtins.fromJSON (
       builtins.unsafeDiscardStringContext (
         builtins.readFile (
-          ../.config/.my-omp.omp.json # path relative to home.nix
+          ./.config/.my-omp.omp.json # path relative to home.nix
         )
       )
     );
@@ -216,7 +216,7 @@ in {
     enable = true;
     settings = builtins.fromJSON (
       builtins.unsafeDiscardStringContext (
-        builtins.readFile ../.config/fastfetch/config.jsonc
+        builtins.readFile ./.config/fastfetch/config.jsonc
       )
     );
   };
