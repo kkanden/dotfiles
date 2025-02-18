@@ -157,12 +157,16 @@ in {
     extraConfig =
       # sh
       ''
-        bind-key w kill-window
-        bind-key l list-window
+        resurrect_dir="$HOME/.tmux/resurrect"
+        set -g @resurrect-dir $resurrect_dir
+        set -g @resurrect-hook-post-save-all "sed -i 's| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/nix/store/.*/bin/||g' $(readlink -f $resurrect_dir/last)"
+        set -g @resurrect-capture-pane-contents 'on'
+        set -g @continuum-restore 'on'
+        set -g @catppuccin_flavour "mocha"
         set-option -sa terminal-features ",*:RGB"
         set-option -g renumber-windows on
-        set -g mouse on
-        set -g @catppuccin_flavour "mocha"
+        bind-key w kill-window
+        bind-key l list-window
         bind-key -T copy-mode-vi v send-keys -X begin-selection
         bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
         bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
@@ -173,6 +177,8 @@ in {
         vim-tmux-navigator
         catppuccin
         yank
+        resurrect
+        continuum
         ;
     };
   };
