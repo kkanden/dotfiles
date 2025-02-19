@@ -112,7 +112,7 @@ in {
       r = "R";
       gs = "git status";
       la = "ls -la";
-      nixh = "nvim ~/dotfiles/home-manager/home.nix";
+      nixh = "nvim ~/dotfiles/home.nix";
     };
     shellAbbrs = {
       tree = "tree -C";
