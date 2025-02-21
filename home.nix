@@ -5,24 +5,6 @@
   inputs,
   ...
 }: let
-  r-packages = with pkgs.rPackages;
-    [
-      languageserver
-      data_table
-      tidyverse
-      stringi
-      DBI
-      DT
-      shiny
-      shinyWidgets
-      shinyalert
-      bslib
-      bsicons
-      plotly
-      shinytitle
-      RPostgres
-    ]
-    ++ [pkgs.rPackages.config]; # have to separate to avoid conflict with variable;
   py-packages = python-pkgs:
     with python-pkgs; [
       black
@@ -60,6 +42,7 @@ in {
         postgresql_17
         ffmpeg
         wget
+        nix-prefetch-git
         # cli
         cowsay
         lolcat
@@ -79,7 +62,6 @@ in {
         ;
     }
     ++ [
-      (pkgs.rWrapper.override {packages = r-packages;}) # R
       (pkgs.python313.withPackages py-packages) # python
     ];
 
