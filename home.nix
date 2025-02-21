@@ -135,9 +135,6 @@ in {
       # fish
       ''
         set fish_greeting
-        if not set -q TMUX
-          exec tmux
-        end
         fortune | cowsay | lolcat
       '';
   };
