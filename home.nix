@@ -9,6 +9,7 @@
     with python-pkgs; [
       black
       isort
+      streamlit
     ];
 in {
   home.username = "oliwia";
