@@ -44,6 +44,7 @@ in {
         ffmpeg
         wget
         nix-prefetch-git
+        air-formatter
         # cli
         cowsay
         lolcat
