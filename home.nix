@@ -11,6 +11,7 @@
       isort
       streamlit
     ];
+  fish-pkg = pkgs.stable.fish;
 in {
   home.username = "oliwia";
   home.homeDirectory = "/home/oliwia";
@@ -44,7 +45,7 @@ in {
         ffmpeg
         wget
         nix-prefetch-git
-        # air-formatter
+        air-formatter
         # cli
         cowsay
         lolcat
@@ -85,13 +86,14 @@ in {
       if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
       then
         shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        exec ${fish-pkg}/bin/fish $LOGIN_OPTION
       fi
     '';
   };
 
   programs.fish = {
     enable = true;
+    package = fish-pkg;
     shellAliases = {
       r = "R";
       gs = "git status";
