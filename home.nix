@@ -10,6 +10,7 @@
       black
       isort
       streamlit
+      pylatexenc
     ];
   fish-pkg = pkgs.stable.fish;
 in {
@@ -46,6 +47,8 @@ in {
         wget
         nix-prefetch-git
         air-formatter
+        tree-sitter
+        tex-fmt
         # cli
         cowsay
         lolcat
@@ -54,6 +57,7 @@ in {
         # langs
         rustup
         nodejs_23
+        jdk
         # formatters
         alejandra
         stylua
