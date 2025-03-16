@@ -125,11 +125,11 @@ in {
       # fish
       ''
         set fish_greeting
+        source ~/.config/fish/kanagawa.fish
         fortune | cowsay | lolcat
       '';
   };
-  xdg.configFile."fish/themes".source = "${inputs.catppuccin-fish}/themes";
-  xdg.configFile."fish/fish_variables".source = ./.config/fish/fish_variables;
+  xdg.configFile."fish/kanagawa.fish".source = ./.config/fish/kanagawa.fish;
 
   programs.tmux = {
     enable = true;
