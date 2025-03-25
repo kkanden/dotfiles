@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "catppuccin-fish": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1725094139,
-        "narHash": "sha256-udiU2TOh0lYL7K7ylbt+BGlSDgCjMpy75vQ98C1kFcc=",
-        "owner": "catppuccin",
-        "repo": "fish",
-        "rev": "cc8e4d8fffbdaab07b3979131030b234596f18da",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "fish",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -70,7 +54,6 @@
     },
     "root": {
       "inputs": {
-        "catppuccin-fish": "catppuccin-fish",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable"
