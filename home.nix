@@ -4,16 +4,18 @@
   pkgs,
   inputs,
   ...
-}: let
-  py-packages = python-pkgs:
-    with python-pkgs; [
+}:
+let
+  py-packages =
+    python-pkgs: with python-pkgs; [
       black
       isort
       streamlit
       pylatexenc
     ];
   fish-pkg = pkgs.stable.fish;
-in {
+in
+{
   home.username = "oliwia";
   home.homeDirectory = "/home/oliwia";
 
@@ -28,8 +30,7 @@ in {
 
   home.packages =
     builtins.attrValues {
-      inherit
-        (pkgs)
+      inherit (pkgs)
         # tools
         neovim
         gcc
@@ -66,8 +67,7 @@ in {
         stylua
         ;
 
-      inherit
-        (pkgs.nodePackages)
+      inherit (pkgs.nodePackages)
         prettier
         ;
     }
@@ -146,8 +146,7 @@ in {
     terminal = "screen-256color";
     extraConfig = builtins.readFile ./.config/tmux/tmux.conf;
     plugins = builtins.attrValues {
-      inherit
-        (pkgs.tmuxPlugins)
+      inherit (pkgs.tmuxPlugins)
         vim-tmux-navigator
         catppuccin
         yank
@@ -163,8 +162,7 @@ in {
     enableFishIntegration = true;
     settings = builtins.fromJSON (
       builtins.unsafeDiscardStringContext (
-        builtins.readFile (
-          ./.config/.my-omp.omp.json # path relative to home.nix
+        builtins.readFile (./.config/.my-omp.omp.json # path relative to home.nix
         )
       )
     );
@@ -205,9 +203,7 @@ in {
   programs.fastfetch = {
     enable = true;
     settings = builtins.fromJSON (
-      builtins.unsafeDiscardStringContext (
-        builtins.readFile ./.config/fastfetch/config.jsonc
-      )
+      builtins.unsafeDiscardStringContext (builtins.readFile ./.config/fastfetch/config.jsonc)
     );
   };
 
