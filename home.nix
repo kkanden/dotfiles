@@ -58,8 +58,11 @@ in {
         rustup
         nodejs_23
         jdk
+        # lsp
+        nixd
         # formatters
         alejandra
+        nixfmt-rfc-style
         stylua
         ;
 
