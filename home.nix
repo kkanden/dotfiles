@@ -6,13 +6,6 @@
   ...
 }:
 let
-  py-packages =
-    python-pkgs: with python-pkgs; [
-      black
-      isort
-      streamlit
-      pylatexenc
-    ];
   fish-pkg = pkgs.stable.fish;
 in
 {
@@ -28,52 +21,49 @@ in
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
-  home.packages =
-    builtins.attrValues {
-      inherit (pkgs)
-        # tools
-        neovim
-        gcc
-        diffutils
-        which
-        tree
-        gnumake
-        fd
-        fzf
-        bat
-        jq
-        gh
-        postgresql_17
-        ffmpeg
-        wget
-        nix-prefetch-git
-        air-formatter
-        tree-sitter
-        tex-fmt
-        # cli
-        cowsay
-        lolcat
-        fortune
-        spotify-player
-        # langs
-        rustup
-        nodejs_23
-        jdk
-        # lsp
-        nixd
-        # formatters
-        alejandra
-        nixfmt-rfc-style
-        stylua
-        ;
+  home.packages = builtins.attrValues {
+    inherit (pkgs)
+      # tools
+      neovim
+      gcc
+      diffutils
+      which
+      tree
+      gnumake
+      fd
+      fzf
+      bat
+      jq
+      gh
+      postgresql_17
+      ffmpeg
+      wget
+      nix-prefetch-git
+      air-formatter
+      tree-sitter
+      tex-fmt
+      powershell
+      # cli
+      cowsay
+      lolcat
+      fortune
+      spotify-player
+      # langs
+      rustup
+      nodejs_23
+      jdk
+      # lsp
+      nixd
+      # formatters
+      alejandra
+      nixfmt-rfc-style
+      stylua
+      ;
 
-      inherit (pkgs.nodePackages)
-        prettier
-        ;
-    }
-    ++ [
-      (pkgs.python313.withPackages py-packages) # python
-    ];
+    inherit (pkgs.nodePackages)
+      prettier
+      ;
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
