@@ -53,7 +53,7 @@
                 {
                     "type": "time",
                     "style": "plain",
-                    "foreground": "#e4d794",
+                    "foreground": "#D27E99",
                     "properties": {
                         "time_format": "15:04:05"
                     }
