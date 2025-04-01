@@ -31,6 +31,7 @@
         modules = [
           ./home.nix
           ./r.nix
+          ./python.nix
           {
             nixpkgs.overlays = [
               (final: prev: { stable = import nixpkgs-stable { inherit (prev) system; }; })
