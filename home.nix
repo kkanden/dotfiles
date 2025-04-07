@@ -72,7 +72,7 @@ in
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".Rprofile".source = ./.config/.Rprofile;
+    ".Rprofile".source = ./config/.Rprofile;
   };
 
   home.sessionVariables = {
@@ -83,7 +83,7 @@ in
     enable = true;
     # enable fish shell as per https://nixos.wiki/wiki/Fish
     initExtra = ''
-      source ~/dotfiles/.config/ls_colors
+      source ~/dotfiles/config/ls_colors
       if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
       then
         shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
@@ -123,11 +123,11 @@ in
       ''
         theme_gruvbox dark soft
         set fish_greeting
-        source ~/.config/fish/kanagawa.fish
+        source ~/config/fish/kanagawa.fish
         fortune | cowsay | lolcat
       '';
   };
-  xdg.configFile."fish/kanagawa.fish".source = ./.config/fish/kanagawa.fish;
+  xdg.configFile."fish/kanagawa.fish".source = ./config/fish/kanagawa.fish;
 
   programs.tmux = {
     enable = true;
@@ -139,7 +139,7 @@ in
     focusEvents = true;
     mouse = true;
     terminal = "screen-256color";
-    extraConfig = builtins.readFile ./.config/tmux/tmux.conf;
+    extraConfig = builtins.readFile ./config/tmux/tmux.conf;
     plugins = builtins.attrValues {
       inherit (pkgs.tmuxPlugins)
         vim-tmux-navigator
@@ -157,7 +157,7 @@ in
     enableFishIntegration = true;
     settings = builtins.fromJSON (
       builtins.unsafeDiscardStringContext (
-        builtins.readFile (./.config/oh-my-posh/omp-gruvbox-material.json # path relative to home.nix
+        builtins.readFile (./config/oh-my-posh/omp-gruvbox-material.json # path relative to home.nix
         )
       )
     );
@@ -198,7 +198,7 @@ in
   programs.fastfetch = {
     enable = true;
     settings = builtins.fromJSON (
-      builtins.unsafeDiscardStringContext (builtins.readFile ./.config/fastfetch/config.jsonc)
+      builtins.unsafeDiscardStringContext (builtins.readFile ./config/fastfetch/config.jsonc)
     );
   };
 
