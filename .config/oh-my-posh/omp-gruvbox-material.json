@@ -29,7 +29,7 @@
                     "type": "path"
                 },
                 {
-                    "foreground": "p:green",
+                    "foreground": "p:aqua",
                     "foreground_templates": [
                         "{{ if or (.Working.Changed) (.Staging.Changed) }}#e9b143{{ end }}",
                         "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#e2cca9{{ end }}",
