@@ -63,6 +63,10 @@ in
     inherit (pkgs.nodePackages)
       prettier
       ;
+
+    inherit (pkgs.fishPlugins)
+      gruvbox
+      ;
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -117,6 +121,7 @@ in
     interactiveShellInit =
       # fish
       ''
+        theme_gruvbox dark soft
         set fish_greeting
         source ~/.config/fish/kanagawa.fish
         fortune | cowsay | lolcat
@@ -152,7 +157,7 @@ in
     enableFishIntegration = true;
     settings = builtins.fromJSON (
       builtins.unsafeDiscardStringContext (
-        builtins.readFile (./.config/.my-omp.omp.json # path relative to home.nix
+        builtins.readFile (./.config/oh-my-posh/omp-gruvbox-material.json # path relative to home.nix
         )
       )
     );
