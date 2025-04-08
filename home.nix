@@ -123,11 +123,11 @@ in
       ''
         theme_gruvbox dark soft
         set fish_greeting
-        source ~/config/fish/kanagawa.fish
+        source ~/.config/fish/gruvbox-material.fish
         fortune | cowsay | lolcat
       '';
   };
-  xdg.configFile."fish/kanagawa.fish".source = ./config/fish/kanagawa.fish;
+  xdg.configFile."fish/gruvbox-material.fish".source = ./config/fish/gruvbox-material.fish;
 
   programs.tmux = {
     enable = true;
