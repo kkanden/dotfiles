@@ -23,31 +23,28 @@ in
 
   home.packages = builtins.attrValues {
     inherit (pkgs)
-      # tools
+      # basic tools
       neovim
       gcc
       diffutils
       which
       tree
       gnumake
-      fd
-      fzf
       bat
       fontconfig
+      wget
+      #additional tools
+      fzf
+      fd
       jq
       gh
       postgresql_17
       ffmpeg
-      wget
       nix-prefetch-git
-      air-formatter
       tree-sitter
-      tex-fmt
-      powershell
       pandoc
-      flatpak
       texliveFull
-      # cli
+      # cosmetic
       cowsay
       lolcat
       fortune
@@ -57,12 +54,15 @@ in
       nodejs_23
       jdk
       perl
+      powershell
       # lsp
       nixd
       # formatters
       alejandra
       nixfmt-rfc-style
       stylua
+      tex-fmt
+      air-formatter
       ;
 
     inherit (pkgs.nodePackages)
