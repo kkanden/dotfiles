@@ -19,6 +19,8 @@ let
       gt
       pacman
       ellipse
+      bookdown
+      kableExtra
     ]
     ++ [ pkgs.rPackages.config ]; # have to separate to avoid conflict with variable;
 in

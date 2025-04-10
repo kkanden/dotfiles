@@ -33,6 +33,7 @@ in
       fd
       fzf
       bat
+      fontconfig
       jq
       gh
       postgresql_17
@@ -43,6 +44,9 @@ in
       tree-sitter
       tex-fmt
       powershell
+      pandoc
+      flatpak
+      texliveFull
       # cli
       cowsay
       lolcat
@@ -52,6 +56,7 @@ in
       rustup
       nodejs_23
       jdk
+      perl
       # lsp
       nixd
       # formatters
