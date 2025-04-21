@@ -9,6 +9,7 @@ let
       polars
       pandas
       numpy
+      jupyter
     ];
 in
 {

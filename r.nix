@@ -21,6 +21,9 @@ let
       ellipse
       bookdown
       kableExtra
+      bigstep
+      glmnet
+      SLOPE
     ]
     ++ [ pkgs.rPackages.config ]; # have to separate to avoid conflict with variable;
 in

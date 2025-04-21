@@ -33,7 +33,8 @@ in
       bat
       fontconfig
       wget
-      #additional tools
+      unzip
+      # additional tools
       fzf
       fd
       jq
@@ -55,6 +56,7 @@ in
       jdk
       perl
       powershell
+      php
       # lsp
       nixd
       # formatters
@@ -71,6 +73,10 @@ in
 
     inherit (pkgs.fishPlugins)
       gruvbox
+      ;
+
+    inherit (pkgs.kdePackages)
+      okular
       ;
   };
 
