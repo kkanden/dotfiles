@@ -186,8 +186,43 @@ in
     };
     extraConfig = {
       init.defaultbranch = "main";
-      core.editor = "nvim";
-      core.autocrlf = false;
+      core = {
+        editor = "nvim";
+        autocrlf = false;
+      };
+      status = {
+        branch = true;
+        short = true;
+        showStash = true;
+      };
+      diff = {
+        context = 3;
+        renames = "copies";
+        interHunkContext = 10;
+      };
+      push = {
+        autoSetupRemote = true;
+        default = "current";
+      };
+      pull = {
+        rebase = true;
+      };
+      rebase = {
+        autoStash = true;
+      };
+      url = {
+        "https://github.com/" = {
+          insteadOf = "gh:";
+        };
+      };
+      colors = {
+        diff = {
+          meta = "black bold";
+          frag = "magenta";
+          context = "white";
+          whitespace = "yellow reverse";
+        };
+      };
     };
   };
 
