@@ -45,6 +45,7 @@ in
       tree-sitter
       pandoc
       texliveFull
+      dust
       # cosmetic
       cowsay
       lolcat
@@ -73,10 +74,6 @@ in
 
     inherit (pkgs.fishPlugins)
       gruvbox
-      ;
-
-    inherit (pkgs.kdePackages)
-      okular
       ;
   };
 
