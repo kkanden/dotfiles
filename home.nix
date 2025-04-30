@@ -46,6 +46,7 @@ in
       pandoc
       texliveFull
       dust
+      yarn
       # cosmetic
       cowsay
       lolcat
@@ -60,6 +61,7 @@ in
       php
       # lsp
       nixd
+      fish-lsp
       # formatters
       alejandra
       nixfmt-rfc-style
@@ -131,11 +133,15 @@ in
       ''
         theme_gruvbox dark soft
         set fish_greeting
-        source ~/.config/fish/gruvbox-material.fish
-        fortune | cowsay | lolcat
+
+        bind \t accept-autosuggestion
+        bind \cn complete-and-search
+
+        source ~/.config/fish/theme.fish
+        fortune | cowsay
       '';
   };
-  xdg.configFile."fish/gruvbox-material.fish".source = ./config/fish/gruvbox-material.fish;
+  xdg.configFile."fish/theme.fish".source = ./config/fish/kanagawa.fish;
 
   programs.tmux = {
     enable = true;
@@ -183,6 +189,7 @@ in
     userEmail = "24637207+kkanden@users.noreply.github.com";
     aliases = {
       lg = "log --oneline --graph --all --decorate --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(yellow)%h%Creset - %C(blue)%an <%ae>%Creset - %C(green)%ad%Creset -%C(red)%d%Creset %s'";
+      lgu = "log --oneline --graph origin..HEAD";
     };
     extraConfig = {
       init.defaultbranch = "main";
