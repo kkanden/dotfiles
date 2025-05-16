@@ -6,6 +6,7 @@ let
       languageserver
       data_table
       tidyverse
+      ggtext
       stringi
       DBI
       DT

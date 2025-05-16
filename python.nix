@@ -4,7 +4,7 @@ let
     python-pkgs: with python-pkgs; [
       black
       isort
-      streamlit
+      # streamlit
       pylatexenc
       polars
       pandas

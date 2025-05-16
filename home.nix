@@ -54,7 +54,7 @@ in
       spotify-player
       # langs
       rustup
-      nodejs_23
+      nodejs_24
       jdk
       perl
       powershell
