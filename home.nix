@@ -83,11 +83,17 @@ in
   # plain files is through 'home.file'.
   home.file = {
     ".Rprofile".source = ./config/.Rprofile;
+    "scripts/tmux-sessionizer.sh" = {
+      source = ./scripts/tmux-sessionizer.sh;
+      executable = true;
+    };
   };
 
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
+  home.sessionPath = [ "$HOME/scripts" ];
 
   programs.bash = {
     enable = true;
@@ -137,6 +143,8 @@ in
         bind \t accept-autosuggestion
         bind \cn complete-and-search
 
+        bind \cf 'tmux-sessionizer.sh'
+
         source ~/.config/fish/theme.fish
         fortune | cowsay
       '';
@@ -145,19 +153,9 @@ in
 
   programs.tmux = {
     enable = true;
-    keyMode = "vi";
-    prefix = "C-Space";
-    baseIndex = 1;
-    disableConfirmationPrompt = true;
-    escapeTime = 10;
-    focusEvents = true;
-    mouse = true;
-    terminal = "screen-256color";
     extraConfig = builtins.readFile ./config/tmux/tmux.conf;
     plugins = builtins.attrValues {
       inherit (pkgs.tmuxPlugins)
-        vim-tmux-navigator
-        catppuccin
         yank
         resurrect
         continuum
@@ -171,8 +169,8 @@ in
     enableFishIntegration = true;
     settings = builtins.fromJSON (
       builtins.unsafeDiscardStringContext (
-        builtins.readFile (./config/oh-my-posh/omp-gruvbox-material.json # path relative to home.nix
-        )
+        builtins.readFile ./config/oh-my-posh/omp-gruvbox-material.json # path relative to home.nix
+
       )
     );
   };
