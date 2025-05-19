@@ -34,6 +34,7 @@ in
       fontconfig
       wget
       unzip
+      xdg-utils
       # additional tools
       fzf
       fd
@@ -91,6 +92,7 @@ in
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    BROWSER = "zen";
   };
 
   home.sessionPath = [ "$HOME/scripts" ];
