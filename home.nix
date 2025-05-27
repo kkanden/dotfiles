@@ -69,6 +69,11 @@ in
       stylua
       tex-fmt
       air-formatter
+      #fonts
+      liberation_ttf
+      open-sans
+      roboto
+      lato
       ;
 
     inherit (pkgs.nodePackages)
@@ -88,6 +93,7 @@ in
       source = ./scripts/tmux-sessionizer.sh;
       executable = true;
     };
+    ".latexmkrc".source = ./config/latexmkrc;
   };
 
   home.sessionVariables = {
@@ -139,7 +145,6 @@ in
     interactiveShellInit =
       # fish
       ''
-        theme_gruvbox dark soft
         set fish_greeting
 
         bind \t accept-autosuggestion
@@ -147,11 +152,10 @@ in
 
         bind \cf 'tmux-sessionizer.sh'
 
-        source ~/.config/fish/theme.fish
+        source ${./config/fish/vague.fish}
         fortune | cowsay
       '';
   };
-  xdg.configFile."fish/theme.fish".source = ./config/fish/kanagawa.fish;
 
   programs.tmux = {
     enable = true;
@@ -171,7 +175,7 @@ in
     enableFishIntegration = true;
     settings = builtins.fromJSON (
       builtins.unsafeDiscardStringContext (
-        builtins.readFile ./config/oh-my-posh/omp-gruvbox-material.json # path relative to home.nix
+        builtins.readFile ./config/oh-my-posh/omp-vague.json # path relative to home.nix
 
       )
     );

@@ -7,6 +7,8 @@ let
       data_table
       tidyverse
       ggtext
+      ggh4x
+      ggsci
       stringi
       DBI
       DT
@@ -25,6 +27,8 @@ let
       bigstep
       glmnet
       SLOPE
+      knockoff
+      doParallel
     ]
     ++ [ pkgs.rPackages.config ]; # have to separate to avoid conflict with variable;
 in
