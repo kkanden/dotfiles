@@ -61,8 +61,17 @@ in
       powershell
       php
       # lsp
-      nixd
+      basedpyright
+      bash-language-server
       fish-lsp
+      ltex-ls
+      lua-language-server
+      vscode-langservers-extracted
+      marksman
+      nixd
+      texlab
+      yaml-language-server
+      taplo
       # formatters
       alejandra
       nixfmt-rfc-style
@@ -76,7 +85,11 @@ in
       lato
       ;
 
-    inherit (pkgs.nodePackages)
+    inherit (pkgs.rPackages)
+      languageserver
+      ;
+
+    inherit (pkgs.stable.nodePackages)
       prettier
       ;
 
@@ -217,6 +230,7 @@ in
       };
       pull = {
         rebase = true;
+        default = "current";
       };
       rebase = {
         autoStash = true;
