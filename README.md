@@ -1,3 +1,6 @@
+> [!WARNING]
+> this is archived as i manage everything in my [nixos repo](https://github.com/kkanden/nixos)
+
 # Dotfiles
 This repository hold my dotfiles which are wholly managed by [nix-community's Home Manager](https://github.com/nix-community/home-manager).
 
